@@ -76,9 +76,5 @@ class FileDB:
         return data
 
     def save_favourites(self, favourites):
-        # Save favourites
-        # Defining a consistent structure here so that I can parse/recognise it when loading
-        # f'{name}:{drink}'
-        # TODO: Save as a CSV?
         self.favourites_store.save_lines(
             [f'{person_id}:{drink_id}' for person_id, drink_id in favourites.items()])

@@ -4,7 +4,8 @@ services:
   db:
     image: mysql
     container_name: mysql_container
-    restart: always
+    restart: "no"
+    #changed from always to no
     environment:
       MYSQL_ROOT_PASSWORD: "${mysql_pass}"
     ports:
@@ -12,6 +13,7 @@ services:
   adminer:
     image: adminer
     container_name: adminer_container
-    restart: always
+    restart: "no"
+    #changed from always to no
     ports:
       - 8080:8080

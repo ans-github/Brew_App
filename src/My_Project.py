@@ -12,8 +12,8 @@ VIEW_FAVOURITES_ARG = 7
 START_ROUND_ARG = 8
 
 # CLI menu
-APP_NAME = 'BrIW'
-VERSION = '0.1'
+APP_NAME = 'The Brew App'
+VERSION = '2.0'
 MENU_TEXT = f'''
 Welcome to {APP_NAME} v{VERSION}!
 Please, select an option by entering a number:
@@ -26,7 +26,6 @@ Please, select an option by entering a number:
 [6] Set a favourite drink
 [7] View favourites
 [8] Start a round
-[9] View a round
 '''
 
 # App data
@@ -176,10 +175,6 @@ def load_from_file(path):
 
 def load_favourites(people, drinks):
     for item in load_from_file(FAVOURITES_FILE_PATH):
-        # Unpacking the items in the list to separate variables
-        # https://treyhunner.com/2018/03/tuple-unpacking-improves-python-code-readability/
-        # I know items.split will return a list with two items, because of the second argument
-        # it will only split once even if there are more instances of ':' in the string
         name, drink = item.split(":", 1)
         if name in people and drink in drinks:
             favourite_drinks[name] = drink
@@ -260,15 +255,11 @@ def handle_exit():
 
 
 def run_round():
-    # Whose round is it?
-    # Print table names
-    # Get input
     name = select_from_menu('Whose round is this?', people)
     if name is False:
         print("Please choose a number from the menu")
         run_round()
-
-    # Create round with owner
+        
     round = Round(name)
     should_add_to_order = True
     while should_add_to_order:
@@ -294,7 +285,6 @@ def run_round():
         if drink == favourite_option:
             drink = favourite_drinks[name]
         round.add_to_round(favourite_drinks, name, drink=drink)
-        # TODO: Ask to add another order with end round option
         should_add_to_order = False
 
         clear_screen()
